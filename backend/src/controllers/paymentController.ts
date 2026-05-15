@@ -32,7 +32,7 @@ export const verifyPayment = async (req: Request, res: Response) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
 
-    const sign = razorpay.utils.verifyPaymentSignature(
+    const sign = razorpay.verifyPaymentSignature(
       { order_id: razorpay_order_id, payment_id: razorpay_payment_id },
       razorpay_signature
     );
