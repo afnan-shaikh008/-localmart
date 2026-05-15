@@ -28,7 +28,7 @@ export const createOrder = async (req: Request, res: Response) => {
         .single();
 
       if (pError || !product) return res.status(404).json({ success: false, message: `Product ${item.product_id} not found` });
-      if (product.stock < item.quantity) return res.status(400).json({ success: false, message: `Insufficient stock for ${product.title}` });
+      if (product.stock < item.quantity) return res.status(400).json({ success: false, message: `Insufficient stock for ${item.product_id}` });
 
       totalAmount += product.price * item.quantity;
     }
@@ -56,7 +56,7 @@ export const createOrder = async (req: Request, res: Response) => {
         order_id: order.id,
         product_id: item.product_id,
         quantity: item.quantity,
-        price_at_purchase: product.price,
+        price_at_purchase: product?.price || 0,
       }]);
     }
 
@@ -71,7 +71,7 @@ export const createOrder = async (req: Request, res: Response) => {
 
     res.status(201).json({ success: true, orderId: order.id, totalAmount });
   } catch (error) {
-    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.errors });
+    if (error instanceof z.ZodError) return res.status(400).json({ success: false, errors: error.issues });
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
