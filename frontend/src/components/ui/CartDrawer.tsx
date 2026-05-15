@@ -37,7 +37,7 @@ export default function CartDrawer({ isOpen, onClose }: { isOpen: boolean, onClo
   const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
-    <>
+    <div>
       {/* Overlay */} la
       <div
         className={cn(

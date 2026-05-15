@@ -121,7 +121,7 @@ export default function HomePage() {
           ].map((item, i) => (
             <div key={i} className="p-4 bg-white rounded-2xl border border-slate-100 flex flex-col items-center gap-3 cursor-pointer hover:shadow-md transition-all">
               <div className={`p-3 rounded-full ${item.color}`}>
-                {React.cloneElement(item.icon as React.ReactElement, { className: 'h-6 w-6' })}
+                {item.icon}
               </div>
               <span className="text-sm font-medium text-slate-700">{item.label}</span>
             </div>
