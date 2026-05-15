@@ -43,7 +43,7 @@ export const register = async (req: Request, res: Response) => {
     res.status(201).json({ success: true, message: 'User registered successfully. Please verify your email/phone.' });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ success: false, errors: error.errors });
+      return res.status(400).json({ success: false, errors: error.issues });
     }
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
@@ -74,7 +74,7 @@ export const verifyOtp = async (req: Request, res: Response) => {
   try {
     const { email, token } = req.body;
 
-    const { data, error } = await supabase.auth.verifyOTP({
+    const { data, error } = await supabase.auth.verifyOtp({
       email,
       token,
       type: 'signup',
