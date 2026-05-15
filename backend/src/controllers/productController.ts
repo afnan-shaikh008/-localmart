@@ -59,7 +59,7 @@ export const getProducts = async (req: Request, res: Response) => {
 
     res.status(200).json({ success: true, data });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    res.status(500).json({ success: false, message: 'Server error fixed' });
   }
 };
 
